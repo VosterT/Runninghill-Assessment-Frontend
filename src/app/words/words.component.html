@@ -1,0 +1,20 @@
+<section class="example-section" [formGroup]="optionsList">
+    <tr *ngFor="let sente of sentence">
+    <h2>{{sente.sentence}}</h2>
+    </tr>
+    <br>
+    <h4>Select all words that could fill in the above sentence:</h4>
+    <tr *ngFor="let option of options">
+      <p><mat-checkbox id={{option.optionDescription}} [checked]="option.value" formControlName="options" (click)="showOptions($event)" >{{option.optionDescription}}</mat-checkbox></p>
+      <mat-checkbox [formControl]="item" (onClick)="onChangeDemo($event)"> Item </mat-checkbox> 
+    </tr>
+  </section>
+  
+  <section class="example-section" [formGroup]="optionsList">
+    <h4>You chose:</h4>
+    <tr *ngFor="let o of opt">
+      {{o}}
+    </tr>
+    {{opt}}
+    {{optionsList.value | json}}
+  </section>
