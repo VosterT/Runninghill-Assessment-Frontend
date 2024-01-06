@@ -14,44 +14,55 @@ import {CommonModule} from '@angular/common';
   imports: [FormsModule, ReactiveFormsModule, MatCheckboxModule, JsonPipe, HttpClientModule,CommonModule],
 })
 export class WordsComponent {
-  optionsList = this._formBuilder.group({
-    options: false,
-    doing : true,
-  });
 
-  options:any;
-  sentence:any;
-  reactiveForm: FormGroup;
-  baseURL: "http://localhost:8080/runninghill";
+  title = 'words';
+
+   
+  optionsL = [
+    {id:1, select: true, optionDescription:'Doing'},
+    {id:2, select: true, optionDescription:'Feeling'},
+    {id:3, select: false, optionDescription:'Talk'},
+  ]
+  // optionsList = this._formBuilder.group({
+  //   options: false,
+  // });
+
+  //  options:any;
+  //  sentence:any;
+  // // reactiveForm: FormGroup;
+
+  //  constructor(private _formBuilder: FormBuilder, private http:HttpClient) {}
+
+  // ngOnInit(){
+  // let getSentence = this.http.get("http://localhost:8080/runninghill/sentence/Test");
+  // getSentence.subscribe((data)=>this.sentence=data);
+  //  let optionsList = this.http.get("http://localhost:8080/runninghill/options/Test");
+  //  optionsList.subscribe((data)=>this.options=data);
+
+  //  this.optionsL = this.optionsL.map((data) => this.options=data )
+  // }
+  //  this.reactiveForm = new FormGroup({
+  //     options: new FormArray([
+  //       new FormControl(optionsList.subscribe,Validators.required)
+  //     ])
+  //  })
+  //  this.optionsList.valueChanges.subscribe((value) => {console.log(value);})
+  // }
   
-  item = new FormControl();
-  opt: string[] = [];
+  showOptions($event){
 
-  constructor(private _formBuilder: FormBuilder, private http:HttpClient) {}
+    const id = $event.target.value;
+    const isChecked = $event.target.checked;
 
-  ngOnInit(){
-  let getSentence = this.http.get("http://localhost:8080/runninghill/sentence/Test");
-  getSentence.subscribe((data)=>this.sentence=data);
-   let optionsList = this.http.get("http://localhost:8080/runninghill/options/Test");
-   optionsList.subscribe((data)=>this.options=data);
-  
-   this.reactiveForm = new FormGroup({
-      options: new FormArray([
-        new FormControl(optionsList.subscribe,Validators.required)
-      ])
-   })
-   this.optionsList.valueChanges.subscribe((value) => {console.log(value);})
+    this.optionsL = this.optionsL.map((d) => {
+      if(d.id == id){
+        d.select = isChecked;
+        return d;
+      }
+      return d;
+
+    });
+
+    console.log("Test ..... " + id + "...." + isChecked + "....." + this.optionsL);
   }
-  
-  showOptions(event:any){
-    //$event.checked = true;
-    console.log("Show options" + event);
-    this.opt.push("Voster");
-    this.opt.push(event.id);
-  }
-
-  onChangeDemo(ob: any) {
-    console.log("checked: " + ob.checked);
- } 
-
 }
