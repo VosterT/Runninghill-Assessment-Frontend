@@ -1,11 +1,13 @@
 <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
   <h4>Runninghill Assessment</h4>
-  
+    <div *ngFor="let sente of sentence">
+    <h2>{{sente.sentence}}</h2>
+    </div>
     <h4>Select all words that could fill in the above sentence:</h4><br>
     
   Options : <div *ngFor = "let option of Options; let i=index">
-    <input type="checkbox" [value]="option.value" (change)="onCheckboxChange($event)"/>
-    {{option.name}}
+    <input type="checkbox" [value]="option.optionDescription" (change)="onCheckboxChange($event)"/>
+    {{option.optionDescription}}
   </div>
   <br>
   Description : <input type="text" name="description" formControlName="description">

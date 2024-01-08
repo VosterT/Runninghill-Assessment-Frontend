@@ -4,6 +4,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { WordsService } from './words.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 @NgModule({
 	declarations: [],
@@ -11,9 +13,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 		BrowserModule,
 		HttpClientModule,
 		ReactiveFormsModule,
-		FormsModule
+		FormsModule,
+		HttpClientTestingModule
 	],
-	providers: [],
+	providers: [WordsService],
 	bootstrap: []
 })
 export class AppModule {}
